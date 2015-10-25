@@ -1,0 +1,29 @@
+{
+  "name": "list-editor",
+  "version": "1.0.0",
+  "description": "a virtual-dom element for editing a small list of items",
+  "main": "index.js",
+  "dependencies": {
+    "get-form-data": "^1.2.2",
+    "isarray": "0.0.1",
+    "object-array-converter": "^1.0.0",
+    "virtual-dom": "^2.1.1",
+    "xtend": "^4.0.0"
+  },
+  "devDependencies": {
+    "virtual-raf": "^2.0.3"
+  },
+  "scripts": {
+    "example": "budo example.js --live"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/editdata/list-editor.git"
+  },
+  "author": "sethvincent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/editdata/list-editor/issues"
+  },
+  "homepage": "https://github.com/editdata/list-editor#readme"
+}
