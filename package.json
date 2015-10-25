@@ -1,6 +1,6 @@
 {
   "name": "list-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a virtual-dom element for editing a small list of items",
   "main": "index.js",
   "dependencies": {
