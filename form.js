@@ -12,16 +12,21 @@ module.exports = function (state, options) {
     state.items[data.key] = data.value
     var out = options.keys ? data : data.value
     options.onsubmit(e, state.items, out)
-    form.querySelector('.list-editor-input-value').value = ''
     var keyEl = form.querySelector('.list-editor-input-key')
+    var valueEl = form.querySelector('.list-editor-input-value')
+    valueEl.value = ''
     keyEl.value = ''
-    keyEl.focus()
+    if (options.keys) {
+      keyEl.focus()
+    } else {
+      valueEl.focus()
+    }
     return false
   }
 
   return h('form.list-editor-form', [
-    h('input.list-editor-input-key' + (state.keys ? '' : '.list-editor-hide-key'), { name: 'key' }),
-    h('input.list-editor-input-value', { name: 'value' }),
+    h('input.list-editor-input-key' + (state.keys ? '' : '.list-editor-hide-key'), { name: 'key', placeholder: 'key' }),
+    h('input.list-editor-input-value', { name: 'value', placeholder: 'value' }),
     h('button.list-editor-submit', { onclick: submit }, options.addButtonText)
   ])
 }

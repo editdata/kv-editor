@@ -12,7 +12,7 @@ function render (state) {
     tree.update(state)
   }
 
-  function oninput (e, value) {}
+  function oninput (e) {}
 
   return listEditor(state, {
     removeItem: removeItem,
