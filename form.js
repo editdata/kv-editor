@@ -11,7 +11,7 @@ module.exports = function (state, options) {
     }
     state.items[data.key] = data.value
     var out = options.keys ? data : data.value
-    options.onsubmit(e, state.items, out)
+    if (options.onsubmit) options.onsubmit(e, state.items, out)
     var keyEl = form.querySelector('.list-editor-input-key')
     var valueEl = form.querySelector('.list-editor-input-value')
     valueEl.value = ''
