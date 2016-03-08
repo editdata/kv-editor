@@ -5,11 +5,11 @@ module.exports = function createitems (state, options) {
     var key = e.target.parentNode.querySelector('.list-editor-item-key').value
     var value = e.target.parentNode.querySelector('.list-editor-item-value').value
     delete state.items[key]
-    options.removeItem(e, state.items, key, value)
+    if (options.removeItem) options.removeItem(e, state.items, key, value)
   }
 
   function input (e) {
-    options.oninput(e, e.target.value)
+    if (options.oninput) options.oninput(e, e.target.value)
   }
 
   var list = Object.keys(state.items).map(function (key) {

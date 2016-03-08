@@ -1,25 +1,21 @@
-var assert = require('assert')
 var h = require('virtual-dom/h')
 var convert = require('object-array-converter')
-var isarray = require('isarray')
+var isObject = require('is-object')
+var isArray = require('isarray')
 var extend = require('xtend')
 var list = require('./list')
 var form = require('./form')
 
+var defaultProps = {
+  removeButtonText: 'x',
+  addButtonText: 'add'
+}
+
 module.exports = function (state, options) {
-  options = extend({
-    removeButtonText: 'x',
-    addButtonText: 'add'
-  }, options)
+  options = extend(defaultProps, options)
 
-  assert.ok(typeof state.items === 'object', 'items object is required')
-  assert.ok(options.onsubmit, 'options.onsubmit function is required')
-  assert.ok(options.oninput, 'options.oninput function is required')
-  assert.ok(options.removeItem, 'options.removeItem function is required')
-
-  if (isarray(state.items)) {
-    state.items = convert.toObject(state.items)
-  }
+  if (isArray(state.items)) state.items = convert.toObject(state.items)
+  if (!isObject(state.items)) throw Error('state.items is required to be an array or object')
 
   return h('#list-editor', [
     list(state, options),
