@@ -1,10 +1,11 @@
 {
   "name": "list-editor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a virtual-dom element for editing a small list of items",
   "main": "index.js",
   "dependencies": {
     "get-form-data": "^1.2.2",
+    "is-object": "^1.0.1",
     "isarray": "0.0.1",
     "object-array-converter": "^1.0.0",
     "virtual-dom": "^2.1.1",
