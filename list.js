@@ -1,6 +1,4 @@
-var h = require('virtual-dom/h')
-
-module.exports = function createitems (options) {
+module.exports = function createitems (h, options) {
   function remove (e) {
     var key = e.target.parentNode.querySelector('.list-editor-item-key').value
     var value = e.target.parentNode.querySelector('.list-editor-item-value').value

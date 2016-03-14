@@ -1,4 +1,3 @@
-var h = require('virtual-dom/h')
 var convert = require('object-array-converter')
 var isObject = require('is-object')
 var isArray = require('isarray')
@@ -11,13 +10,13 @@ var defaultProps = {
   addButtonText: 'add'
 }
 
-module.exports = function (options) {
+module.exports = function (h, options) {
   options = extend(defaultProps, options)
   if (isArray(options.items)) options.items = convert.toObject(options.items)
   if (!isObject(options.items)) throw Error('options.items is required to be an array or object')
 
   return h('#list-editor', [
-    list(options),
-    form(options)
+    list(h, options),
+    form(h, options)
   ])
 }

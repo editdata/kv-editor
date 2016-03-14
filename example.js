@@ -1,3 +1,4 @@
+var h = require('virtual-dom/h')
 var raf = require('virtual-raf')
 var listEditor = require('./index')
 
@@ -18,7 +19,7 @@ function render (state) {
   state.onsubmit = onsubmit
   state.oninput = oninput
 
-  return listEditor(state)
+  return listEditor(h, state)
 }
 
 var tree = raf({ items: {}, keys: true }, render, require('virtual-dom'))

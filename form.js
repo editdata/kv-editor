@@ -1,7 +1,6 @@
 var getFormData = require('get-form-data')
-var h = require('virtual-dom/h')
 
-module.exports = function (options) {
+module.exports = function (h, options) {
   function submit (e) {
     e.preventDefault()
     var form = e.target.parentNode
