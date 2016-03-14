@@ -1,17 +1,17 @@
 var getFormData = require('get-form-data')
 var h = require('virtual-dom/h')
 
-module.exports = function (state, options) {
+module.exports = function (options) {
   function submit (e) {
     e.preventDefault()
     var form = e.target.parentNode
     var data = getFormData(form)
-    if (!state.keys) {
-      data.key = Object.keys(state.items).length
+    if (!options.keys) {
+      data.key = Object.keys(options.items).length
     }
-    state.items[data.key] = data.value
+    options.items[data.key] = data.value
     var out = options.keys ? data : data.value
-    if (options.onsubmit) options.onsubmit(e, state.items, out)
+    if (options.onsubmit) options.onsubmit(e, options.items, out)
     var keyEl = form.querySelector('.list-editor-input-key')
     var valueEl = form.querySelector('.list-editor-input-value')
     valueEl.value = ''
@@ -25,7 +25,7 @@ module.exports = function (state, options) {
   }
 
   return h('form.list-editor-form', [
-    h('input.list-editor-input-key' + (state.keys ? '' : '.list-editor-hide-key'), { name: 'key', placeholder: 'key' }),
+    h('input.list-editor-input-key' + (options.keys ? '' : '.list-editor-hide-key'), { name: 'key', placeholder: 'key' }),
     h('input.list-editor-input-value', { name: 'value', placeholder: 'value' }),
     h('button.list-editor-submit', { onclick: submit }, options.addButtonText)
   ])

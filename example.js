@@ -14,11 +14,11 @@ function render (state) {
 
   function oninput (e) {}
 
-  return listEditor(state, {
-    removeItem: removeItem,
-    onsubmit: onsubmit,
-    oninput: oninput
-  })
+  state.removeItem = removeItem
+  state.onsubmit = onsubmit
+  state.oninput = oninput
+
+  return listEditor(state)
 }
 
 var tree = raf({ items: {}, keys: true }, render, require('virtual-dom'))

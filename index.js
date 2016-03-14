@@ -11,14 +11,13 @@ var defaultProps = {
   addButtonText: 'add'
 }
 
-module.exports = function (state, options) {
+module.exports = function (options) {
   options = extend(defaultProps, options)
-
-  if (isArray(state.items)) state.items = convert.toObject(state.items)
-  if (!isObject(state.items)) throw Error('state.items is required to be an array or object')
+  if (isArray(options.items)) options.items = convert.toObject(options.items)
+  if (!isObject(options.items)) throw Error('options.items is required to be an array or object')
 
   return h('#list-editor', [
-    list(state, options),
-    form(state, options)
+    list(options),
+    form(options)
   ])
 }
