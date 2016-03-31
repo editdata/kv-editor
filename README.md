@@ -2,7 +2,7 @@
 
 A virtual-dom element for editing a small list of items. The list can be an array or flat object.
 
-[![npm](https://img.shields.io/npm/v/nlist-editor.svg)](http://npmjs.com/list-editor)
+[![npm](https://img.shields.io/npm/v/list-editor.svg)](http://npmjs.com/list-editor)
 
 ## Example
 
