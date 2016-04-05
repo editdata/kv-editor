@@ -12,7 +12,12 @@ var defaultProps = {
 
 module.exports = function (h, options) {
   options = extend(defaultProps, options)
-  if (isArray(options.items)) options.items = convert.toObject(options.items)
+
+  if (isArray(options.items)) {
+    options.items = convert.toObject(options.items)
+    options.keys = false
+  }
+
   if (!isObject(options.items)) throw Error('options.items is required to be an array or object')
 
   return h('#list-editor', [

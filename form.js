@@ -24,8 +24,8 @@ module.exports = function (h, options) {
   }
 
   return h('form.list-editor-form', [
-    h('input.list-editor-input-key' + (options.keys ? '' : '.list-editor-hide-key'), { name: 'key', placeholder: 'key' }),
-    h('input.list-editor-input-value', { name: 'value', placeholder: 'value' }),
+    h('input.list-editor-input-key' + (options.keys ? '' : '.list-editor-hide-key'), { type: 'text', name: 'key', placeholder: 'key' }),
+    h('input.list-editor-input-value', { type: 'text', name: 'value', placeholder: 'value' }),
     h('button.list-editor-submit', { onclick: submit }, options.addButtonText)
   ])
 }

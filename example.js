@@ -22,5 +22,5 @@ function render (state) {
   return listEditor(h, state)
 }
 
-var tree = raf({ items: {}, keys: true }, render, require('virtual-dom'))
+var tree = raf({ items: [], keys: false }, render, require('virtual-dom'))
 document.body.appendChild(tree())

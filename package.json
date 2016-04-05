@@ -1,6 +1,6 @@
 {
   "name": "list-editor",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "a virtual-dom element for editing a small list of items",
   "main": "index.js",
   "dependencies": {
@@ -11,6 +11,7 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
+    "virtual-dom": "^2.1.1",
     "virtual-raf": "^2.0.3"
   },
   "scripts": {
