@@ -1,27 +1,29 @@
+var assert = require('assert')
 var convert = require('object-array-converter')
 var isObject = require('is-object')
 var isArray = require('isarray')
-var extend = require('xtend')
-var list = require('./list')
-var form = require('./form')
+var html = require('yo-yo')
 
-var defaultProps = {
-  removeButtonText: 'x',
-  addButtonText: 'add'
-}
+module.exports = function createEditor (options) {
+  options = options || {}
+  options.namespace = options.namespace || 'list-editor'
+  options.showKeys = options.showKeys == false ? false : true
 
-module.exports = function (h, options) {
-  options = extend(defaultProps, options)
+  var list = require('./list')(options)
+  var form = require('./form')(options)
 
-  if (isArray(options.items)) {
-    options.items = convert.toObject(options.items)
-    options.keys = false
+  return function renderEditor (state, send) {
+    var items
+    if (isArray(state.items)) {
+      items = convert.toObject(state.items)
+      options.showKeys = false
+    }
+
+    assert.ok(state.items || isObject(state.items), 'state.items is required to be an array or object')
+
+    return html`<div class="list-editor">
+      ${list(state, send)}
+      ${form(state, send)}
+    </div>`
   }
-
-  if (!isObject(options.items)) throw Error('options.items is required to be an array or object')
-
-  return h('#list-editor', [
-    list(h, options),
-    form(h, options)
-  ])
 }

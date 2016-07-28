@@ -1,31 +1,37 @@
-var getFormData = require('get-form-data')
+var assert = require('assert')
+var html = require('yo-yo')
+var css = require('dom-css')
 
-module.exports = function (h, options) {
-  function submit (e) {
-    e.preventDefault()
-    var form = e.target.parentNode
-    var data = getFormData(form)
-    if (!options.keys) {
-      data.key = Object.keys(options.items).length
+module.exports = function createForm (options) {
+  var inputKey = require('./input-key')(options)
+  var inputValue = require('./input-value')(options)
+
+  return function renderForm (state, send) {
+    state.addButtonText = state.addButtonText || 'Add'
+    var value
+    var key
+
+    function button (state, send) {
+      function onclick (e) {
+        e.preventDefault()
+        if (!key) key = Object.keys(state.items).length
+        send(options.namespace + ':add', { key: key, value: value })
+      }
+
+      return html`<button class="list-editor-submit" onclick=${onclick}>
+        ${state.addButtonText}
+      </button>`
     }
-    options.items[data.key] = data.value
-    var out = options.keys ? data : data.value
-    if (options.onsubmit) options.onsubmit(e, options.items, out)
-    var keyEl = form.querySelector('.list-editor-input-key')
-    var valueEl = form.querySelector('.list-editor-input-value')
-    valueEl.value = ''
-    keyEl.value = ''
-    if (options.keys) {
-      keyEl.focus()
-    } else {
-      valueEl.focus()
+
+    function onaction (action, data) {
+      if (action === options.namespace + ':inputKey') key = data.key
+      if (action === options.namespace + ':inputValue') value = data.value
     }
-    return false
+
+    return html`<form class="list-editor-form">
+      ${inputKey({ key: key }, onaction)}
+      ${inputValue({ value: value }, onaction)}
+      ${button(state, send)}
+    </form>`
   }
-
-  return h('form.list-editor-form', [
-    h('input.list-editor-input-key' + (options.keys ? '' : '.list-editor-hide-key'), { type: 'text', name: 'key', placeholder: 'key' }),
-    h('input.list-editor-input-value', { type: 'text', name: 'value', placeholder: 'value' }),
-    h('button.list-editor-submit', { onclick: submit }, options.addButtonText)
-  ])
 }

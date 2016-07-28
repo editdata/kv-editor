@@ -1,23 +1,44 @@
-module.exports = function createitems (h, options) {
-  function remove (e) {
-    var key = e.target.parentNode.querySelector('.list-editor-item-key').value
-    var value = e.target.parentNode.querySelector('.list-editor-item-value').value
-    delete options.items[key]
-    if (options.removeItem) options.removeItem(e, options.items, key, value)
+var assert = require('assert')
+var html = require('yo-yo')
+var css = require('dom-css')
+
+module.exports = function createList (options) {
+  var inputKey = require('./input-key')(options)
+  var inputValue = require('./input-value')(options)
+
+  return function renderList (state, send) {
+    state.removeButtonText = state.removeButtonText || 'x'
+    assert.ok(state.items || typeof state.items === 'object', 'state.items must be an object')
+    var keys = Object.keys(state.items)
+
+    function button (state, send) {
+      function onclick (e) {
+        e.preventDefault()
+        send(options.namespace + ':remove', { key: state.key, value: state.value })
+      }
+
+      return html`<button class="list-editor-item-remove" onclick=${onclick}>
+        ${state.removeButtonText}
+      </button>`
+    }
+
+    function eachKey (key) {
+      var value = state.items[key]
+      var el = html`<li class="list-editor-item" id="list-editor-item-key-${state.key}">
+        ${inputKey({ key: key, value: value }, send)}
+        ${inputValue({ key: key, value: value }, send)}
+        ${button({ key: key, value: value, removeButtonText: state.removeButtonText }, send)}
+      </li>`
+
+      css(el, { listStyleType: 'none' })
+      return el
+    }
+
+    var el = html`<ul class="list-editor-items">
+      ${keys.map(eachKey)}
+    </ul>`
+
+    css(el, { padding: 0, margin: 0 })
+    return el
   }
-
-  function input (e) {
-    if (options.oninput) options.oninput(e, e.target.value)
-  }
-
-  var list = Object.keys(options.items).map(function (key) {
-    var value = String(options.items[key])
-    return h('li.list-editor-item', [
-      h('input.list-editor-item-key' + (options.keys ? '' : '.list-editor-hide-key'), { type: 'text', oninput: input, value: key }),
-      h('input.list-editor-item-value', { type: 'text', oninput: input, value: value }),
-      h('button.list-editor-item-close', { onclick: remove }, options.removeButtonText)
-    ])
-  })
-
-  return h('ul.list-editor-items', list)
 }
