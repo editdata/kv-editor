@@ -1,21 +1,28 @@
 {
   "name": "list-editor",
-  "version": "2.0.0",
-  "description": "a virtual-dom element for editing a small list of items",
+  "version": "3.0.0",
+  "description": "a reusable element for editing small lists of items",
   "main": "index.js",
   "dependencies": {
-    "get-form-data": "^1.2.2",
+    "dom-css": "^2.0.1",
     "is-object": "^1.0.1",
-    "isarray": "0.0.1",
+    "isarray": "^1.0.0",
     "object-array-converter": "^1.0.0",
-    "xtend": "^4.0.0"
+    "yo-yo": "^1.2.2"
   },
   "devDependencies": {
-    "virtual-dom": "^2.1.1",
-    "virtual-raf": "^2.0.3"
+    "choo": "^3.2.0",
+    "clone": "^1.0.2",
+    "minidocs": "github:freeman-lab/minidocs",
+    "standard": "^7.1.2",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.0",
+    "tape-run": "^2.1.4"
   },
   "scripts": {
-    "example": "budo example.js --live"
+    "example:array": "budo --dir examples/ examples/array.js --live",
+    "example:object": "budo --dir examples/ examples/object.js --live",
+    "example:choo": "budo --dir examples/ examples/choo.js --live"
   },
   "repository": {
     "type": "git",
