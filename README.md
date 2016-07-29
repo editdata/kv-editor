@@ -1,6 +1,6 @@
 # list-editor
 
-A reusable element for editing small lists of items. The list can be an array or flat object.
+A reusable element for editing small lists of items.
 
 [![npm](https://img.shields.io/npm/v/list-editor.svg)](http://npmjs.com/list-editor)
 
@@ -12,7 +12,7 @@ npm install --save editdata/list-editor
 
 ## Usage
 
-The goal of list-editor is to make it easy to add an editable list of key/value pairs or just values to a page, with the freedom to handle state management using any state library.
+The goal of list-editor is to make it easy to add an editable list of key/value pairs or just values to a page, with the ability to handle state management using any state library.
 
 Here's a basic example:
 
@@ -91,7 +91,7 @@ The four actions would now be named like this:
 
 Every action in list-editor is accompanied by the key/value pair of the item being added, edited, or removed.
 
-The `list-editor:inputKey` also provides `data.previousKey` so you can replace the old key with the new one in the application state.
+The `list-editor:inputKey` action also provides `data.previousKey` so you can replace the old key with the new one in the application state.
 
 When a new item is added, for instance:
 
@@ -114,49 +114,52 @@ var tree = listEditor(state, function onaction (action, data) {
 document.body.appendChild(tree)
 ```
 
+### Using reducer helpers
+
+This module comes with the `list-editor/reducer-helpers.js` file which provides a helper for each action that makes it easier to modify the application state.
+
+Check out the reducer [helpers example](#reducer-helpers) and the [API docs for each helper method](#-var-helpers-require-list-editor-reducer-helpers-).
+
 ## Examples
 
-For an example of usage with [choo](https://github.com/yoshuawuyts/choo), see [examples/choo.js](examples/choo.js).
-
+### Array of items
 For an example of usage with an array of items, see [examples/array.js](examples/array.js).
 
-For an example of usage with a flat object, see [examples/object.js](examples/object.js) or look at the full example here:
+### Flat object of key/value pairs
+For an example of usage with a flat object, see [examples/object.js](examples/object.js).
+
+### Using list-editor with choo
+For an example of usage with [choo](https://github.com/yoshuawuyts/choo), see [examples/choo.js](examples/choo.js).
+
+### Reducer helpers
+For an example using this package's provided reducer helpers, see [examples/reducer-helpers](examples/reducer-helpers.js) or look at the full example here:
 
 ```js
-var html = require('yo-yo')
 var clone = require('clone')
 var createListEditor = require('list-editor')
 var listEditor = createListEditor()
 
+var helpers = require('../reducer-helpers')
+
 var state = {
-  items: {
-    awesome: 'ok',
-    nice: 'sure',
-    cool: 'poop'
-  }
+  items: ['a', 'b', 'c']
 }
 
 function onaction (action, data) {
   if (action === 'list-editor:inputKey') {
-    var keys = Object.keys(state.items)
-    var items = {}
-    keys.forEach(function (key) {
-      if (key !== data.previousKey) items[key] = state.items[key]
-      else items[data.key] = data.value
-    })
-    state.items = items
+    state.items = helpers.inputKey(state.items, data)
   }
 
   else if (action === 'list-editor:inputValue') {
-    state.items[data.key] = data.value
+    state.items = helpers.inputValue(state.items, data)
   }
 
   else if (action === 'list-editor:add') {
-    state.items[data.key] = data.value
+    state.items = helpers.add(state.items, data)
   }
 
   else if (action === 'list-editor:remove') {
-    delete state.items[data.key]
+    state.items = helpers.remove(state.items, data)
   }
 
   var update = render(clone(state), onaction)
@@ -213,6 +216,24 @@ list-editor has 4 actions it can send:
   - data: `{ key: key, value: value }`
 
 All actions return the key and value of the item being manipulated. The `list-editor:inputKey` action also provides `data.previousKey` so you can accurately replace the old key with the new one in the application state. This is only needed if `state.items` is an object. If you started with an array of items, the key will be the index of the array. If you started with an object, the key will be the property key.
+
+### `var helpers = require('list-editor/reducer-helpers')`
+
+For every action that list-editor can send, there is a corresponding reducer helper in the `list-editor/reducer-helpers.js` file that simplifies manipulating state. If you have unusual needs these helpers may not work for you. Otherwise, the helpers can be a great starting point for setting up state management for this component.
+
+Each helper takes the items object or array, and the data object sent with the corresponding action.
+
+#### `helpers.add(items, data)`
+Returns `items` array or object with added item.
+
+#### `helpers.remove(items, data)`
+Returns `items` array or object with item removed.
+
+#### `helpers.inputKey(items, data)`
+Returns `items` array or object with modified item key.
+
+#### `helpers.inputValue(items, data)`
+Returns modified `items` array or object with modified item value.
 
 ## License
 [MIT](LICENSE.md)

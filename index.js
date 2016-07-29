@@ -13,6 +13,8 @@ module.exports = function createEditor (options) {
   var form = require('./form')(options)
 
   return function renderEditor (state, send) {
+    assert.ok(send || typeof send === 'function', 'callback function is required')
+
     var items
     if (isArray(state.items)) {
       items = convert.toObject(state.items)

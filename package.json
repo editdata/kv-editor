@@ -22,7 +22,9 @@
   "scripts": {
     "example:array": "budo --dir examples/ examples/array.js --live",
     "example:object": "budo --dir examples/ examples/object.js --live",
-    "example:choo": "budo --dir examples/ examples/choo.js --live"
+    "example:choo": "budo --dir examples/ examples/choo.js --live",
+    "example:helpers": "budo --dir examples/ examples/reducer-helpers.js --live",
+    "test": "browserify tests/*.js | tape-run"
   },
   "repository": {
     "type": "git",
