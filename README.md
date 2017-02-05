@@ -9,8 +9,8 @@ A reusable UI element for editing lists of key/value data.
 
 [npm-image]: https://img.shields.io/npm/v/kv-editor.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/kv-editor
-[travis-image]: https://img.shields.io/travis/sethvincent/kv-editor.svg?style=flat-square
-[travis-url]: https://travis-ci.org/sethvincent/kv-editor
+[travis-image]: https://img.shields.io/travis/editdata/kv-editor.svg?style=flat-square
+[travis-url]: https://travis-ci.org/editdata/kv-editor
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 [conduct]: https://img.shields.io/badge/code%20of%20conduct-contributor%20covenant-green.svg?style=flat-square
@@ -140,9 +140,9 @@ Read about the changes to this project in [CHANGELOG.md](CHANGELOG.md). The form
 
 ## Contact
 
-- **chat** – You can chat about this project at [http://gitter.im/sethvincent/ask](http://gitter.im/sethvincent/ask)
-- **issues** – Please open issues in the [issues queue](https://github.com/sethvincent/kv-editor/issues)
-- **twitter** – [@sethdvincent](https://twitter.com/sethdvincent)
+- **chat** – You can chat about this project at [http://gitter.im/editdata/discuss](http://gitter.im/editdata/discuss)
+- **issues** – Please open issues in the [issues queue](https://github.com/editdata/kv-editor/issues)
+- **twitter** – [@edit_data](https://twitter.com/edit_data)
 - **email** – Need in-depth support via paid contract? Send an email to sethvincent@gmail.com
 
 ## License
