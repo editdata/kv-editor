@@ -1,8 +1,8 @@
 var html = require('bel')
 var clone = require('clone')
-var listEditor = require('../index')({ showKeys: true })
 var update = require('nanomorph/update')
 
+var listEditor = require('../index')({ showKeys: true })
 var helpers = require('../helpers')
 
 var items =  {

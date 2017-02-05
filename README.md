@@ -116,15 +116,10 @@ For an example of usage with an array of items, see [examples/array.js](examples
 ### Flat object of key/value pairs
 For an example of usage with a flat object, see [examples/object.js](examples/object.js).
 
-
-## Documentation
-- [Getting started](docs/getting-started.md)
-- [Related modules](docs/related-modules.md)
-- [API](docs/api.md)
-- [Tests](tests/)
-
 ### Examples
 - [Basic example](examples/basic-usage.js)
+- [Array of items](examples/array.js)
+- [Flat object of key/value pairs](examples/object.js)
 
 ## Contributing
 
