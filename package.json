@@ -11,6 +11,7 @@
     "object-array-converter": "^1.0.0"
   },
   "devDependencies": {
+    "browserify": "^14.0.0",
     "clone": "^2.1.0",
     "documentation": "^4.0.0-beta.18",
     "nanomorph": "^2.1.3",
@@ -23,7 +24,9 @@
   "scripts": {
     "example:array": "budo --dir examples/ examples/array.js --live",
     "example:object": "budo --dir examples/ examples/object.js --live",
-    "test": "browserify tests/*.js | tape-run"
+    "lint": "standard .",
+    "test:only": "browserify tests/*.js | tape-run",
+    "test": "npm run lint && npm run lint"
   },
   "repository": {
     "type": "git",
