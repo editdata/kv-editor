@@ -1,6 +1,6 @@
 {
   "name": "kv-editor",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "a reusable element for editing small lists of items",
   "main": "index.js",
   "dependencies": {
