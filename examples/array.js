@@ -1,36 +1,52 @@
-var html = require('yo-yo')
+var html = require('bel')
 var clone = require('clone')
+var update = require('nanomorph/update')
+
 var listEditor = require('../index')()
 
-var state = {
-  items: ['a', 'b', 'c']
+var helpers = require('../helpers')
+
+var items = ['a', 'b', 'c']
+
+function onChange (data) {
+  console.log('onChange', data)
+  items = helpers.change(items, data)
+  action(items)
 }
 
-function onaction (action, data) {
-  if (action === 'list-editor:inputKey') {
-    state.items.splice(data.key, 1)
-    state.items[data.key] = data.value
-  }
-
-  else if (action === 'list-editor:inputValue') {
-    state.items[data.key] = data.value
-  }
-
-  else if (action === 'list-editor:add') {
-    state.items[data.key] = data.value
-  }
-
-  else if (action === 'list-editor:remove') {
-    state.items.splice(data.key, 1)
-  }
-
-  var update = render(clone(state), onaction)
-  html.update(app, update)
+function onAdd (data) {
+  console.log('onAdd', data)
+  items = helpers.add(items, data)
+  action(items)
 }
 
-function render (state, onaction) {
-  return listEditor(state, onaction)
+function onRemove (data) {
+  console.log('onRemove', data)
+  items = helpers.remove(items, data)
+  action(items)
 }
 
-var app = render(state, onaction)
-document.body.appendChild(app)
+function action (state) {
+  var newTree = render({
+    items: state,
+    onAdd: onAdd,
+    onChange: onChange,
+    onRemove, onRemove
+  })
+
+  morph(newTree, tree)
+}
+
+function render (params) {
+  return listEditor(params)
+}
+
+var tree = render({
+  items: items,
+  onAdd: onAdd,
+  onChange: onChange,
+  onRemove, onRemove
+})
+
+var morph = update(tree)
+document.body.appendChild(tree)

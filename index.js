@@ -2,30 +2,32 @@ var assert = require('assert')
 var convert = require('object-array-converter')
 var isObject = require('is-object')
 var isArray = require('isarray')
-var html = require('yo-yo')
+var html = require('bel')
+
+var createList = require('./list')
+var createForm = require('./form')
 
 module.exports = function createEditor (options) {
   options = options || {}
-  options.namespace = options.namespace || 'list-editor'
-  options.showKeys = options.showKeys == false ? false : true
 
-  var list = require('./list')(options)
-  var form = require('./form')(options)
+  return function renderEditor (params) {
+    assert.ok(params.items || isObject(params.items), 'list-editor: params.items is required and must be an array or object')
 
-  return function renderEditor (state, send) {
-    assert.ok(send || typeof send === 'function', 'callback function is required')
-
+    var list = createList(params)
+    var form = createForm(params)
     var items
-    if (isArray(state.items)) {
-      items = convert.toObject(state.items)
-      options.showKeys = false
+
+    if (isArray(params.items)) {
+      params.items = convert.toObject(params.items)
+      params.showKeys = false
+    } else {
+      params.showKeys = true
     }
 
-    assert.ok(state.items || isObject(state.items), 'state.items is required to be an array or object')
-
+    console.log('renderEditor', params.items)
     return html`<div class="list-editor">
-      ${list(state, send)}
-      ${form(state, send)}
+      ${list(params)}
+      ${form(params)}
     </div>`
   }
 }

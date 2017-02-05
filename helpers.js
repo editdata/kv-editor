@@ -7,25 +7,31 @@ module.exports = {
   },
   remove: function (items, data) {
     if (isarray(items)) {
-      items.splice(data.key, 1)
+      items.splice(parseFloat(data.key), 1)
     } else {
       delete items[data.key]
     }
+
     return items
   },
-  inputKey: function (items, data) {
+  change: function (items, data) {
     if (isarray(items)) {
-      items.splice(data.key, 1)
       items[data.key] = data.value
     } else {
       var keys = Object.keys(items)
       var modified = {}
+
       keys.forEach(function (key) {
-        if (key !== data.previousKey) modified[key] = items[key]
-        else modified[data.key] = data.value
+        if (data.previousKey && key === data.previousKey) {
+          modified[data.key] = data.value || items[data.previousKey]
+        } else {
+          modified[key] = (key === data.key) ? data.value : items[key]
+        }
       })
+
       items = modified
     }
+
     return items
   },
   inputValue: function (items, data) {

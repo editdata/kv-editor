@@ -1,45 +1,56 @@
-var html = require('yo-yo')
+var html = require('bel')
 var clone = require('clone')
-var listEditor = require('../index')()
+var listEditor = require('../index')({ showKeys: true })
+var update = require('nanomorph/update')
 
-var state = {
-  items: {
-    awesome: 'ok',
-    nice: 'sure',
-    cool: 'poop'
-  }
+var helpers = require('../helpers')
+
+var items =  {
+  awesome: 'ok',
+  nice: 'sure',
+  cool: 'poop'
 }
 
-function onaction (action, data) {
-  if (action === 'list-editor:inputKey') {
-    var keys = Object.keys(state.items)
-    var items = {}
-    keys.forEach(function (key) {
-      if (key !== data.previousKey) items[key] = state.items[key]
-      else items[data.key] = data.value
-    })
-    state.items = items
-  }
-
-  else if (action === 'list-editor:inputValue') {
-    state.items[data.key] = data.value
-  }
-
-  else if (action === 'list-editor:add') {
-    state.items[data.key] = data.value
-  }
-
-  else if (action === 'list-editor:remove') {
-    delete state.items[data.key]
-  }
-
-  var update = render(clone(state), onaction)
-  html.update(app, update)
+function onChange (data) {
+  console.log('onChange', data)
+  items = helpers.change(items, data)
+  action(items)
 }
 
-function render (state, onaction) {
-  return listEditor(state, onaction)
+function onAdd (data) {
+  console.log('onAdd', data)
+  items = helpers.add(items, data)
+  action(items)
 }
 
-var app = render(state, onaction)
-document.body.appendChild(app)
+function onRemove (data) {
+  console.log('onRemove', data)
+  items = helpers.remove(items, data)
+  action(items)
+}
+
+function action (state) {
+  var newTree = render({
+    items: state,
+    onAdd: onAdd,
+    onChange: onChange,
+    onRemove, onRemove
+  })
+
+  morph(newTree, tree)
+}
+
+function render (params) {
+  return listEditor(params)
+}
+
+var tree = render({
+  items: items,
+  onAdd: onAdd,
+  onChange: onChange,
+  onRemove, onRemove
+})
+
+var morph = update(tree)
+document.body.appendChild(tree)
+

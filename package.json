@@ -1,39 +1,38 @@
 {
-  "name": "list-editor",
+  "name": "kv-editor",
   "version": "3.0.0",
   "description": "a reusable element for editing small lists of items",
   "main": "index.js",
   "dependencies": {
-    "dom-css": "^2.0.1",
+    "bel": "^4.5.1",
+    "dom-css": "^2.1.0",
     "is-object": "^1.0.1",
-    "isarray": "^1.0.0",
-    "object-array-converter": "^1.0.0",
-    "yo-yo": "^1.2.2"
+    "isarray": "^2.0.1",
+    "object-array-converter": "^1.0.0"
   },
   "devDependencies": {
-    "choo": "^3.2.0",
-    "clone": "^1.0.2",
-    "minidocs": "github:freeman-lab/minidocs",
-    "standard": "^7.1.2",
+    "clone": "^2.1.0",
+    "documentation": "^4.0.0-beta.18",
+    "nanomorph": "^2.1.3",
+    "standard": "^8.6.0",
     "tap-spec": "^4.1.1",
-    "tape": "^4.6.0",
-    "tape-run": "^2.1.4"
+    "tape": "^4.6.3",
+    "tape-run": "^2.1.5",
+    "yo-yo": "^1.4.0"
   },
   "scripts": {
     "example:array": "budo --dir examples/ examples/array.js --live",
     "example:object": "budo --dir examples/ examples/object.js --live",
-    "example:choo": "budo --dir examples/ examples/choo.js --live",
-    "example:helpers": "budo --dir examples/ examples/reducer-helpers.js --live",
     "test": "browserify tests/*.js | tape-run"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/editdata/list-editor.git"
+    "url": "git+https://github.com/editdata/kv-editor.git"
   },
   "author": "sethvincent",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/editdata/list-editor/issues"
+    "url": "https://github.com/editdata/kv-editor/issues"
   },
-  "homepage": "https://github.com/editdata/list-editor#readme"
+  "homepage": "https://github.com/editdata/kv-editor#readme"
 }

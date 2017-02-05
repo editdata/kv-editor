@@ -2,33 +2,17 @@
 
 A reusable UI element for editing lists of key/value data.
 
-[![npm][npm-image]][npm-url]
-[![travis][travis-image]][travis-url]
-[![standard][standard-image]][standard-url]
-[![conduct][conduct]][conduct-url]
-
-[npm-image]: https://img.shields.io/npm/v/kv-editor.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/kv-editor
-[travis-image]: https://img.shields.io/travis/sethvincent/kv-editor.svg?style=flat-square
-[travis-url]: https://travis-ci.org/sethvincent/kv-editor
-[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
-[standard-url]: http://npm.im/standard
-[conduct]: https://img.shields.io/badge/code%20of%20conduct-contributor%20covenant-green.svg?style=flat-square
-[conduct-url]: CONDUCT.md
-
-## About
-
-The goal of kv-editor is to make it easy to add an editable list of key/value pairs or just values to a page.
-
-This editor only works with arrays or flat objects. No objects with nested properties will work.
+[![npm](https://img.shields.io/npm/v/kv-editor.svg)](http://npmjs.com/kv-editor)
 
 ## Install
 
-```sh
+```
 npm install --save kv-editor
 ```
 
 ## Usage
+
+The goal of kv-editor is to make it easy to add an editable list of key/value pairs or just values to a page.
 
 Here's a basic example:
 
@@ -117,34 +101,5 @@ For an example of usage with an array of items, see [examples/array.js](examples
 For an example of usage with a flat object, see [examples/object.js](examples/object.js).
 
 
-## Documentation
-- [Getting started](docs/getting-started.md)
-- [Related modules](docs/related-modules.md)
-- [API](docs/api.md)
-- [Tests](tests/)
-
-### Examples
-- [Basic example](examples/basic-usage.js)
-
-## Contributing
-
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) first.
-
-## Conduct
-
-It's important that this project contributes to a friendly, safe, and welcoming environment for all, particularly for folks that are historically underrepresented in technology. Read this project's [code of conduct](CONDUCT.md)
-
-## Change log
-
-Read about the changes to this project in [CHANGELOG.md](CHANGELOG.md). The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
-
-## Contact
-
-- **chat** – You can chat about this project at [http://gitter.im/sethvincent/ask](http://gitter.im/sethvincent/ask)
-- **issues** – Please open issues in the [issues queue](https://github.com/sethvincent/kv-editor/issues)
-- **twitter** – [@sethdvincent](https://twitter.com/sethdvincent)
-- **email** – Need in-depth support via paid contract? Send an email to sethvincent@gmail.com
-
 ## License
-
-[ISC](LICENSE.md)
+[MIT](LICENSE.md)
